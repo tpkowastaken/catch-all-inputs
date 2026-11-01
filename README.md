@@ -23,6 +23,10 @@ Pushing to `main` builds and publishes the site on Cloudflare Pages. `mise run d
 
 `redirect-www/` is a small Worker that sends `www.catchallinputs.com` to the root domain in one redirect. Publish it with `mise run deploy-www-redirect`.
 
+## Privacy
+
+`privacy.html` must be updated whenever the site starts collecting something new, including new PostHog events or settings.
+
 ## Limits
 
 Use Chrome or Edge. Only they support the Keyboard Lock API, which is what catches shortcuts such as ⌘W and Ctrl+T, and it only works on localhost or HTTPS. Other browsers still act on those shortcuts. Operating system shortcuts may also get through.
