@@ -109,6 +109,15 @@ h1 {
   margin-bottom: 0.25em;
 }
 
+#details a {
+  color: var(--ink);
+  text-underline-offset: 0.15em;
+}
+
+#details a:hover {
+  color: var(--hit);
+}
+
 #details li::marker {
   color: var(--hit);
 }
