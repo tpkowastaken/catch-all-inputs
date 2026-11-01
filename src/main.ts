@@ -1,5 +1,6 @@
 import "@fontsource-variable/anybody/standard.css";
 import "./style.css";
+import { trackAds, trackTestFinished, trackTestStarted } from "./analytics";
 import { LOCKABLE_KEY_CODES, describeKey } from "./keys";
 
 const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -180,6 +181,7 @@ async function start() {
   }
 
   capturing = true;
+  trackTestStarted();
   caught = 0;
   count.textContent = "0 caught";
   trail.replaceChildren();
@@ -204,6 +206,7 @@ async function start() {
 function stop() {
   if (!capturing) return;
   capturing = false;
+  trackTestFinished();
   heldGamepadButtons.clear();
   keyboardApi()?.unlock();
   if (document.pointerLockElement) document.exitPointerLock();
@@ -237,6 +240,7 @@ void document.fonts.ready.then(() => {
 });
 
 startButton.addEventListener("click", () => void start());
+trackAds();
 if (!keyboardApi()) {
   notice.hidden = false;
   notice.textContent =
