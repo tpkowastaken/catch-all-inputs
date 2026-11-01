@@ -1,0 +1,34 @@
+[settings]
+lockfile = true
+
+[tools]
+node = "24.22.2"
+
+[tasks.install]
+description = "Install the exact dependencies from package-lock.json"
+run = "npm ci"
+
+[tasks.dev]
+description = "Serve the site with Vite at http://localhost:5173"
+depends = ["install"]
+run = "npx vite"
+
+[tasks.build]
+description = "Type-check and build the site into dist/"
+depends = ["install"]
+run = "npx tsc --noEmit && npx vite build"
+
+[tasks.preview]
+description = "Serve the production build at http://localhost:4173"
+depends = ["build"]
+run = "npx vite preview"
+
+[tasks.deploy]
+description = "Build the site and deploy it to Cloudflare Pages"
+depends = ["build"]
+run = "npx wrangler pages deploy dist --project-name catch-all-inputs --branch main"
+
+[tasks.deploy-www-redirect]
+description = "Deploy the Worker that redirects www to the root domain"
+depends = ["install"]
+run = "npx wrangler deploy --config redirect-www/wrangler.jsonc"
