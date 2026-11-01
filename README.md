@@ -1,10 +1,10 @@
-<img src="assets/icon.svg" width="64" height="64" alt="">
+<img src="public/favicon.svg" width="64" height="64" alt="">
 
 # catch-all-inputs
 
 Created in [T3 Code](https://t3.codes).
 
-A fullscreen page that catches every input it can. Only Esc gets through, and it leaves fullscreen.
+A fullscreen keyboard tester and mouse tester that catches every input it can. Only Esc gets through, and it leaves fullscreen.
 
 ## Run
 
@@ -13,7 +13,7 @@ mise install
 mise run dev
 ```
 
-Open http://localhost:5173 and press **Start catching**. `mise run build` and `mise run preview` build and serve the production version.
+Open http://localhost:5173 and press **Start the test**. `mise run build` and `mise run preview` build and serve the production version.
 
 Node is pinned by `mise.toml` and `mise.lock`, npm packages by `package-lock.json`.
 

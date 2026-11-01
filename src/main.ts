@@ -210,8 +210,8 @@ function stop() {
   if (document.fullscreenElement) void document.exitFullscreen();
   trap.hidden = true;
   intro.hidden = false;
-  summary.textContent = `Caught ${caught.toLocaleString()} ${caught === 1 ? "input" : "inputs"}. Start again whenever you like.`;
-  startButton.textContent = "Catch again";
+  summary.textContent = `Caught ${caught.toLocaleString()} ${caught === 1 ? "input" : "inputs"}. Test again whenever you like.`;
+  startButton.textContent = "Test again";
   startButton.focus();
 }
 

@@ -2,9 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>Catch all inputs</title>
-    <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Keyboard Tester &amp; Mouse Tester Online | Catch All Inputs</title>
+    <meta name="description" content="Free online keyboard tester and mouse tester. Catch all inputs in fullscreen: every key, shortcut, mouse button and scroll shows up instantly. No install." />
+    <link rel="canonical" href="https://catchallinputs.com/" />
+    <meta name="theme-color" content="#2a1fd6" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Catch All Inputs" />
+    <meta property="og:url" content="https://catchallinputs.com/" />
+    <meta property="og:title" content="Keyboard Tester &amp; Mouse Tester Online | Catch All Inputs" />
+    <meta property="og:description" content="Press any key, click any button and scroll. Every input shows up on screen instantly. Free, with nothing to install." />
+    <meta property="og:image" content="https://catchallinputs.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Catch All Inputs: keyboard tester and mouse tester" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "Catch All Inputs",
+            "url": "https://catchallinputs.com/"
+          },
+          {
+            "@type": "WebApplication",
+            "name": "Catch All Inputs",
+            "alternateName": ["Keyboard Tester", "Mouse Tester"],
+            "url": "https://catchallinputs.com/",
+            "description": "Free online keyboard tester and mouse tester that catches all inputs in fullscreen and shows each one on screen.",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript. Chrome or Edge is needed to catch browser shortcuts.",
+            "image": "https://catchallinputs.com/og-image.png",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          }
+        ]
+      }
+    </script>
+
     <script>
       // Keyboard Lock only works in a secure context, and Cloudflare also serves this site over plain HTTP.
       if (!isSecureContext) location.replace(location.href.replace(/^http:/, "https:"));
@@ -14,10 +57,61 @@
   </head>
   <body>
     <main id="intro">
-      <h1>Every key, click and scroll stops here.</h1>
-      <p id="summary">The site goes fullscreen and keeps every input to itself. Press Esc to leave.</p>
-      <button id="start" type="button" autofocus>Start catching</button>
-      <p id="notice" role="status" hidden></p>
+      <section id="hero">
+        <h1><span id="brand">Catch all inputs:</span> Keyboard tester &amp; mouse tester</h1>
+        <p id="summary">Press any key, click any button or scroll, and see it on screen right away. Free, with nothing to install. Press Esc to leave.</p>
+        <button id="start" type="button" autofocus>Start the test</button>
+        <p id="notice" role="status" hidden></p>
+      </section>
+
+      <div id="details">
+        <section>
+          <h2>Online keyboard tester</h2>
+          <p>Check that every key on your keyboard works. Press a key and its name fills the screen, turning pink for as long as you hold it. A key that shows nothing may be dead, and a name you didn't press points to a stuck or misread key.</p>
+          <ul>
+            <li>Letters, numbers, function keys, the numpad and arrow keys</li>
+            <li>Shift, Ctrl, Alt, Option, Win and ⌘, alone or in combinations</li>
+            <li>Browser shortcuts such as Ctrl+T and ⌘W, in Chrome and Edge</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Online mouse tester</h2>
+          <p>Find out whether your mouse buttons, scroll wheel and sensor are behaving. The counter goes up by one for each press, so a worn switch that double-clicks stands out when one click adds two.</p>
+          <ul>
+            <li>Left, right and middle click</li>
+            <li>Back and forward side buttons</li>
+            <li>Scrolling up, down, left and right</li>
+            <li>Mouse movement, followed by a pink dot</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why catch all inputs?</h2>
+          <p>Most key testers stop working as soon as a shortcut closes the tab or a side button goes back a page. This one runs in fullscreen and holds on to every input it can, so you can press anything without losing your place. It also picks up gamepad buttons, touch, pen, copy and paste. Only Esc gets through, and it takes you back here.</p>
+        </section>
+
+        <section>
+          <h2>How to test your keyboard and mouse</h2>
+          <ol>
+            <li>Select <strong>Start the test</strong>. The page goes fullscreen.</li>
+            <li>Press each key, click each button and scroll in every direction. Recent inputs are listed along the bottom.</li>
+            <li>Press Esc to leave and see how many inputs were caught.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Common questions</h2>
+          <h3>Is this keyboard and mouse tester free?</h3>
+          <p>Yes. There's no account and nothing to download. It runs in your browser.</p>
+          <h3>Which browser should I use?</h3>
+          <p>Chrome or Edge on a computer. Only they let a page catch shortcuts such as ⌘W and Ctrl+T. Other browsers still show keys and clicks, but act on those shortcuts themselves.</p>
+          <h3>Why doesn't a key show up?</h3>
+          <p>The key may be faulty, but some inputs never reach the browser. Operating system shortcuts and the Fn key are often handled before a page can see them, so try the key in another app before replacing anything.</p>
+          <h3>Does the site save what I type?</h3>
+          <p>No. This site only shows your inputs on the page. It doesn't store them or send them anywhere, and the list clears each time you start.</p>
+        </section>
+      </div>
     </main>
 
     <div id="trap" hidden>
