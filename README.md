@@ -4,7 +4,7 @@
 
 Created in [T3 Code](https://t3.codes).
 
-A fullscreen keyboard tester and mouse tester that catches every input it can. Only Esc gets through, and it leaves fullscreen.
+A fullscreen keyboard tester and mouse tester that catches every input it can. Only holding Esc gets through, and it leaves fullscreen.
 
 ## Run
 

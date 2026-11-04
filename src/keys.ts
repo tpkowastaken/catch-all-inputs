@@ -3,14 +3,15 @@ const digits = "0123456789".split("").map((digit) => `Digit${digit}`);
 const numpadDigits = "0123456789".split("").map((digit) => `Numpad${digit}`);
 const functionKeys = Array.from({ length: 24 }, (_, index) => `F${index + 1}`);
 
-// Every physical key the Keyboard Lock API can hold, deliberately without Escape.
+// Every physical key the Keyboard Lock API can hold. Escape is included so a quick press is caught
+// and the browser only leaves fullscreen when Esc is held down.
 export const LOCKABLE_KEY_CODES = [
   ...letters,
   ...digits,
   ...numpadDigits,
   ...functionKeys,
   "Backquote", "Minus", "Equal", "BracketLeft", "BracketRight", "Backslash", "Semicolon", "Quote", "Comma", "Period", "Slash", "IntlBackslash", "IntlRo", "IntlYen",
-  "Backspace", "Tab", "CapsLock", "Enter", "Space", "ContextMenu",
+  "Escape", "Backspace", "Tab", "CapsLock", "Enter", "Space", "ContextMenu",
   "ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "MetaLeft", "MetaRight", "Fn",
   "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown", "Insert", "Delete",
   "NumLock", "NumpadAdd", "NumpadSubtract", "NumpadMultiply", "NumpadDivide", "NumpadDecimal", "NumpadEnter", "NumpadEqual", "NumpadComma",

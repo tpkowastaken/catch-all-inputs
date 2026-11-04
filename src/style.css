@@ -209,6 +209,17 @@ footer {
   font-variant-numeric: tabular-nums;
 }
 
+#leave {
+  padding-bottom: 0.15em;
+  background: linear-gradient(var(--hit), var(--hit)) left bottom / 0% 0.15em no-repeat;
+}
+
+#leave.holding {
+  color: var(--hit);
+  background-size: 100% 0.15em;
+  transition: background-size 1500ms linear;
+}
+
 #cursor {
   position: absolute;
   top: 0;

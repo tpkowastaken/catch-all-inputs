@@ -15,8 +15,11 @@ const measure = byId("measure");
 const trail = byId<HTMLOListElement>("trail");
 const count = byId("count");
 const cursor = byId("cursor");
+const leave = byId("leave");
 
 const TRAIL_LENGTH = 40;
+// Short of Chrome's own hold-Esc-to-exit, so the page leaves cleanly before the browser does.
+const HOLD_TO_LEAVE_MS = 1500;
 const MOUSE_BUTTONS = ["Left click", "Middle click", "Right click", "Back button", "Forward button"];
 
 let capturing = false;
@@ -24,6 +27,19 @@ let caught = 0;
 let cursorX = innerWidth / 2;
 let cursorY = innerHeight / 2;
 const heldGamepadButtons = new Set<string>();
+let leaveTimer: number | undefined;
+
+function startLeaving() {
+  if (leaveTimer !== undefined) return;
+  leave.classList.add("holding");
+  leaveTimer = window.setTimeout(stop, HOLD_TO_LEAVE_MS);
+}
+
+function cancelLeaving() {
+  window.clearTimeout(leaveTimer);
+  leaveTimer = undefined;
+  leave.classList.remove("holding");
+}
 
 const keyboardApi = () =>
   (navigator as Navigator & { keyboard?: { lock(codes?: string[]): Promise<void>; unlock(): void } }).keyboard;
@@ -78,19 +94,24 @@ window.addEventListener(
   "keydown",
   (event) => {
     if (!capturing) return;
-    if (event.code === "Escape") {
-      // Browsers without a keyboard lock list hand Esc to the page, so leave from here as well.
-      stop();
-      return;
-    }
     event.preventDefault();
     event.stopPropagation();
+    if (event.code === "Escape") {
+      // A tap counts as an input; holding it down leaves.
+      if (!event.repeat) record("Esc", true);
+      startLeaving();
+      return;
+    }
     if (!event.repeat) record(describeKey(event), true);
   },
   { capture: true },
 );
 
-block("keyup", () => last.classList.remove("held"));
+block("keyup", (event: KeyboardEvent) => {
+  last.classList.remove("held");
+  if (event.code === "Escape") cancelLeaving();
+});
+window.addEventListener("blur", cancelLeaving);
 block("keypress");
 block("beforeinput");
 
@@ -159,7 +180,7 @@ async function lockKeyboard() {
   const keyboard = keyboardApi();
   if (!keyboard) return false;
   try {
-    // Listing every key except Esc keeps the browser's instant Esc-to-exit working.
+    // Locking Esc makes Chrome and Edge require holding it to leave fullscreen.
     await keyboard.lock(LOCKABLE_KEY_CODES);
   } catch {
     try {
@@ -206,6 +227,7 @@ async function start() {
 function stop() {
   if (!capturing) return;
   capturing = false;
+  cancelLeaving();
   trackTestFinished();
   heldGamepadButtons.clear();
   keyboardApi()?.unlock();
@@ -220,16 +242,6 @@ function stop() {
 
 document.addEventListener("fullscreenchange", () => {
   if (!document.fullscreenElement) stop();
-});
-
-// Esc can release the pointer before it reaches fullscreen; treat that as leaving too.
-let pointerWasLocked = false;
-document.addEventListener("pointerlockchange", () => {
-  if (document.pointerLockElement) pointerWasLocked = true;
-  else if (pointerWasLocked) {
-    pointerWasLocked = false;
-    stop();
-  }
 });
 
 window.addEventListener("resize", () => {
