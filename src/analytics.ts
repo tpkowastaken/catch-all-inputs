@@ -1,19 +1,30 @@
-// Only events that explain ad revenue live here. Never send what a visitor pressed, or how many inputs they made.
-declare const posthog: { capture?(event: string, properties?: Record<string, unknown>): void };
+// Only events and logs that explain app behavior live here. Never send what a visitor pressed, or how many inputs they made.
+type PostHogLogger = { info?(message: string, attributes?: Record<string, unknown>): void; warn?(message: string, attributes?: Record<string, unknown>): void };
+type PostHogClient = { capture?(event: string, properties?: Record<string, unknown>): void; logger?: PostHogLogger };
 
-// The snippet only adds capture when init runs, which local and preview builds skip.
-const capture = (event: string, properties?: Record<string, unknown>) => posthog.capture?.(event, properties);
+const posthogClient = () => (window as Window & { posthog?: PostHogClient }).posthog;
+const capture = (event: string, properties?: Record<string, unknown>) => posthogClient()?.capture?.(event, properties);
+const log = (message: string, attributes?: Record<string, unknown>) => posthogClient()?.logger?.info?.(message, attributes);
+const warn = (message: string, attributes?: Record<string, unknown>) => posthogClient()?.logger?.warn?.(message, attributes);
 
 let testStartedAt = 0;
 
 export function trackTestStarted() {
   testStartedAt = performance.now();
   capture("test_started");
+  log("input test started");
+}
+
+export function trackTestStartFailed() {
+  capture("test_start_failed");
+  warn("input test start refused", { reason: "fullscreen_request_rejected" });
 }
 
 // Ads can't be seen during a fullscreen test, so this is time spent away from them.
 export function trackTestFinished() {
-  capture("test_finished", { duration_seconds: Math.round((performance.now() - testStartedAt) / 1000) });
+  const durationSeconds = Math.round((performance.now() - testStartedAt) / 1000);
+  capture("test_finished", { duration_seconds: durationSeconds });
+  log("input test finished", { duration_seconds: durationSeconds });
 }
 
 export function trackAds() {

@@ -1,6 +1,6 @@
 import "@fontsource-variable/anybody/standard.css";
 import "./style.css";
-import { trackAds, trackTestFinished, trackTestStarted } from "./analytics";
+import { trackAds, trackTestFinished, trackTestStarted, trackTestStartFailed } from "./analytics";
 import { LOCKABLE_KEY_CODES, describeKey } from "./keys";
 
 const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -196,6 +196,7 @@ async function start() {
   try {
     await document.documentElement.requestFullscreen({ navigationUI: "hide" });
   } catch (error) {
+    trackTestStartFailed();
     notice.hidden = false;
     notice.textContent = `The browser refused fullscreen, so nothing is being caught. ${(error as Error).message}`;
     return;

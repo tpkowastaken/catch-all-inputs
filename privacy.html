@@ -57,11 +57,11 @@
 
       <section>
         <h2>Analytics from PostHog</h2>
-        <p>We use PostHog to see how the site is used and how ads perform. It runs in cookieless mode, so it stores nothing on your device, and recording of clicks and sessions is turned off. Data goes through an address we set up for PostHog, <code>blueberry.tomapli.cz</code>, to its EU cloud service.</p>
+        <p>We use PostHog to see how the site is used and how ads perform. It uses browser storage to recognize a pseudonymous visitor, automatically records interactions and records sessions. Data is sent to PostHog's EU cloud service.</p>
         <p>PostHog receives:</p>
         <ul>
           <li>Pages viewed and when you leave them, and the address you came from</li>
-          <li>When a test starts and finishes, and how long it lasted</li>
+          <li>When a test starts, finishes or cannot start because fullscreen was refused, and how long a completed test lasted</li>
           <li>Whether the ad script loaded, and whether each ad slot was filled</li>
           <li>Your browser, operating system, device type, screen size and language</li>
           <li>Your IP address, used to estimate your approximate location and, with your browser details, to build an anonymous visitor ID that changes daily</li>
